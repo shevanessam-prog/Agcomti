@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agenda Comunitaria de Tiwanaku</title>
+<meta name="description" content="Agenda de actividades, tradiciones y noticias de la comunidad de Tiwanaku.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700;800&family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- SVG reutilizable: chakana (cruz andina escalonada) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="chakana" viewBox="0 0 100 100">
+    <path d="M35 5h30v20h10v10h20v30H75v10H65v20H35V75H25V65H5V35h20V25h10z M40 40v20h20V40z" fill="currentColor" fill-rule="evenodd"/>
+  </symbol>
+</svg>
+
+<header class="header" id="inicio-top">
+  <a class="logo" href="#inicio">
+    <svg class="logo-icon"><use href="#chakana"/></svg>
+    <span>Tiwanaku<small>Agenda comunitaria</small></span>
+  </a>
+  <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav" id="nav">
+    <a href="#inicio">Inicio</a>
+    <a href="#comunidad">Comunidad</a>
+    <a href="#agenda">Agenda</a>
+    <a href="#tradiciones">Tradiciones</a>
+    <a href="#turismo">Visitantes</a>
+    <a href="#participa">Participa</a>
+    <button class="nav-cta" id="loginBtn" type="button">Ingresar</button>
+  </nav>
+</header>
+
+<main>
+  <!-- CARRUSEL -->
+  <section class="hero" id="inicio" aria-roledescription="carrusel" aria-label="Destacados">
+    <div class="slides" id="slides">
+      <article class="slide active s1">
+        <svg class="slide-art" aria-hidden="true"><use href="#chakana"/></svg>
+        <div class="slide-text">
+          <p class="kicker">Próxima gran fecha</p>
+          <h1>Año Nuevo Andino en Tiwanaku</h1>
+          <p>Recibimos juntos el nuevo ciclo con ofrendas, música y comida compartida.</p>
+          <a class="btn" href="#agenda">Ver la agenda</a>
+        </div>
+      </article>
+      <article class="slide s2">
+        <svg class="slide-art" aria-hidden="true"><use href="#chakana"/></svg>
+        <div class="slide-text">
+          <p class="kicker">Mercado comunal</p>
+          <h1>Feria de productores cada sábado</h1>
+          <p>Papa nativa, quinua, tejidos y cerámica hechos por familias de la comunidad.</p>
+          <a class="btn" href="#agenda">Ver horarios</a>
+        </div>
+      </article>
+      <article class="slide s3">
+        <svg class="slide-art" aria-hidden="true"><use href="#chakana"/></svg>
+        <div class="slide-text">
+          <p class="kicker">Saberes vivos</p>
+          <h1>Talleres de tejido, música y lengua</h1>
+          <p>Las abuelas y los abuelos enseñan aymara, sikuris y telar a las nuevas generaciones.</p>
+          <a class="btn" href="#tradiciones">Conocer más</a>
+        </div>
+      </article>
+    </div>
+    <button class="arrow prev" id="prev" aria-label="Anterior">&#10094;</button>
+    <button class="arrow next" id="next" aria-label="Siguiente">&#10095;</button>
+    <div class="dots" id="dots"></div>
+    <div class="progress"><i id="bar"></i></div>
+  </section>
+
+  <div class="greca" aria-hidden="true"></div>
+
+  <!-- COMUNIDAD -->
+  <section class="section" id="comunidad">
+    <div class="wrap two-col">
+      <div class="reveal">
+        <h2>Nuestra comunidad</h2>
+        <p>Tiwanaku es un pueblo aymara al pie del lago Titicaca, guardián de un legado milenario. Aquí la historia no está en los libros: se vive en las fiestas, en la chacra y en la palabra de las familias.</p>
+        <p>Esta agenda reúne las actividades de todos: reuniones de la junta, ferias, talleres y celebraciones, para que nadie se quede sin participar.</p>
+      </div>
+      <div class="cards">
+        <div class="card reveal"><svg><use href="#chakana"/></svg><h3>Historia</h3><p>Centro ceremonial y cultural de una civilización que floreció hace más de mil años.</p></div>
+        <div class="card reveal"><svg><use href="#chakana"/></svg><h3>Lengua</h3><p>El aymara se habla en casa, en la escuela y en las asambleas.</p></div>
+        <div class="card reveal"><svg><use href="#chakana"/></svg><h3>Organización</h3><p>Decisiones en comunidad, con turnos de servicio y trabajo compartido.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AGENDA -->
+  <section class="section dark" id="agenda">
+    <div class="wrap">
+      <h2 class="reveal">Agenda de actividades</h2>
+      <div class="toolbar reveal">
+        <input type="search" id="q" placeholder="Buscar por nombre, lugar o responsable" aria-label="Buscar actividades">
+        <input type="date" id="fecha" aria-label="Filtrar por fecha">
+        <select id="vista" aria-label="Mostrar actividades">
+          <option value="prox">Próximas</option><option value="ant">Anteriores</option><option value="all">Todas</option>
+        </select>
+        <button class="chip" id="clear" type="button">Limpiar</button>
+      </div>
+      <div class="filters reveal" role="group" aria-label="Tipo de actividad">
+        <button class="chip on" data-f="all">Todas</button>
+        <button class="chip" data-f="comunitaria">Comunitarias</button>
+        <button class="chip" data-f="cultural">Culturales</button>
+        <button class="chip" data-f="turistica">Turísticas</button>
+      </div>
+      <div class="gestion" id="gestion" hidden></div>
+      <div class="events" id="events" aria-live="polite"></div>
+      <p class="empty" id="empty" hidden>No se encontraron actividades con estos filtros.</p>
+    </div>
+  </section>
+
+  <!-- VISITANTES -->
+  <section class="section" id="turismo">
+    <div class="wrap">
+      <h2 class="reveal">Si nos visitas</h2>
+      <div class="grid3">
+        <div class="card reveal"><svg><use href="#chakana"/></svg><h3>Sitio arqueológico</h3><p>Patrimonio de la Humanidad de la UNESCO. Consulta los recorridos guiados disponibles.</p></div>
+        <div class="card reveal"><svg><use href="#chakana"/></svg><h3>Actividades para visitantes</h3><p>Fechas, horarios, lugares y responsables de cada actividad turística.</p><p><a class="link" href="#agenda" data-tipo="turistica">Ver actividades turísticas</a></p></div>
+        <div class="card reveal"><svg><use href="#chakana"/></svg><h3>Productos locales</h3><p>Compra directamente a productoras y productores en la feria comunal.</p><p><a class="link" href="#agenda" data-tipo="comunitaria">Ver ferias y reuniones</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRADICIONES -->
+  <section class="section" id="tradiciones">
+    <div class="wrap">
+      <h2 class="reveal">Tradiciones que seguimos cuidando</h2>
+      <div class="grid3">
+        <figure class="trad reveal t1"><figcaption><h3>Textiles</h3><p>Cada diseño del aguayo cuenta quién es la familia y de dónde viene.</p></figcaption></figure>
+        <figure class="trad reveal t2"><figcaption><h3>Música</h3><p>Sikuris, zampoñas y tarkas acompañan cada fiesta y cada siembra.</p></figcaption></figure>
+        <figure class="trad reveal t3"><figcaption><h3>Chacra y cocina</h3><p>Papa, chuño, quinua y habas: la mesa comunitaria nace de la tierra.</p></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTICIPA -->
+  <section class="section soft" id="participa">
+    <div class="wrap narrow reveal">
+      <h2>Participa en la agenda</h2>
+      <p>¿Organizas una actividad? Cuéntanos y la sumamos al calendario.</p>
+      <form id="form" novalidate>
+        <label>Nombre<input name="nombre" required autocomplete="name"></label>
+        <label>Correo o teléfono<input name="contacto" required autocomplete="email"></label>
+        <label>Actividad que quieres proponer<textarea name="msg" rows="4" required></textarea></label>
+        <button class="btn" type="submit">Enviar propuesta</button>
+        <p class="note" id="note" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="greca" aria-hidden="true"></div>
+  <div class="wrap foot-grid">
+    <div>
+      <a class="logo" href="#inicio"><svg class="logo-icon"><use href="#chakana"/></svg><span>Tiwanaku<small>Agenda comunitaria</small></span></a>
+      <p>Una agenda hecha por y para la comunidad.</p>
+    </div>
+    <div><h4>Secciones</h4><a href="#comunidad">Comunidad</a><a href="#agenda">Agenda</a><a href="#tradiciones">Tradiciones</a><a href="#participa">Participa</a></div>
+    <div><h4>Contacto</h4><p>Casa comunal de Tiwanaku</p><p>contacto@tiwanaku.example</p><p>Lunes a viernes, 9:00 a 17:00</p></div>
+  </div>
+  <p class="copy">&copy; <span id="year"></span> Comunidad de Tiwanaku. Todos los derechos reservados.</p>
+</footer>
+
+<dialog id="dlgLogin" aria-labelledby="tLogin"><div class="dlg">
+  <h3 id="tLogin">Iniciar sesión</h3>
+  <form id="loginForm" novalidate>
+    <label>Usuario<input name="u" autocomplete="username" required></label>
+    <label>Contraseña<input name="p" type="password" autocomplete="current-password" required></label>
+    <p class="note" id="loginNote" role="alert"></p>
+    <div class="row"><button class="btn" type="submit">Ingresar</button><button class="btn ghost" type="button" data-close>Cancelar</button></div>
+    <p class="hint">Versión de demostración. Usuarios: alcalde, secretaria, organizador, comunario, visitante. Clave: 1234</p>
+  </form>
+</div></dialog>
+
+<dialog id="dlgInfo" aria-labelledby="iTitle"><div class="dlg">
+  <div id="info"></div>
+  <div class="row"><button class="btn ghost" type="button" data-close>Cerrar</button></div>
+</div></dialog>
+
+<dialog id="dlgForm" aria-labelledby="fTitle"><div class="dlg">
+  <h3 id="fTitle">Nueva actividad</h3>
+  <form id="actForm" novalidate>
+    <input type="hidden" name="id">
+    <label>Nombre<input name="nombre" required></label>
+    <label>Descripción<textarea name="descripcion" rows="3" required></textarea></label>
+    <div class="two"><label>Fecha<input name="fecha" type="date" required></label><label>Hora<input name="hora" type="time" required></label></div>
+    <label>Lugar<input name="lugar" required></label>
+    <div class="two"><label>Tipo<select name="tipo"><option value="comunitaria">Comunitaria</option><option value="cultural">Cultural</option><option value="turistica">Turística</option></select></label>
+    <label>Responsable<input name="responsable" required></label></div>
+    <p class="note" id="actNote" role="alert"></p>
+    <div class="row"><button class="btn" type="submit">Guardar</button><button class="btn ghost" type="button" data-close>Cancelar</button></div>
+  </form>
+</div></dialog>
+
+<dialog id="dlgRep" aria-labelledby="rTitle"><div class="dlg">
+  <h3 id="rTitle">Reporte de actividades</h3>
+  <div id="rep"></div>
+  <div class="row"><button class="btn" type="button" onclick="window.print()">Imprimir</button><button class="btn ghost" type="button" data-close>Cerrar</button></div>
+</div></dialog>
+
+<button class="top" id="top" aria-label="Volver arriba">&#8593;</button>
+<script src="script.js"></script>
+</body>
+</html>
