@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iniciar sesión | Agenda de Tiwanaku</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700;800&family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style_login.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="chakana" viewBox="0 0 100 100">
+    <path d="M35 5h30v20h10v10h20v30H75v10H65v20H35V75H25V65H5V35h20V25h10z M40 40v20h20V40z" fill="currentColor" fill-rule="evenodd"/>
+  </symbol>
+</svg>
+
+<main class="login">
+  <aside class="brand" aria-hidden="false">
+    <svg class="bg-art a1"><use href="#chakana"/></svg>
+    <svg class="bg-art a2"><use href="#chakana"/></svg>
+    <a class="logo" href="index.html">
+      <svg class="logo-icon"><use href="#chakana"/></svg>
+      <span>Tiwanaku<small>Agenda comunitaria</small></span>
+    </a>
+    <div class="brand-text">
+      <h1>Bienvenido a la agenda de Tiwanaku</h1>
+      <p>Ingresa para consultar, organizar y dar seguimiento a las actividades de la comunidad.</p>
+    </div>
+    <div class="greca" aria-hidden="true"></div>
+  </aside>
+
+  <section class="panel">
+    <form class="card" id="loginForm" novalidate>
+      <svg class="card-icon"><use href="#chakana"/></svg>
+      <h2>Iniciar sesión</h2>
+      <p class="sub">Usa tu correo y contraseña para continuar.</p>
+
+      <div class="field" id="fEmail">
+        <input type="email" id="email" name="email" placeholder=" " autocomplete="email" required>
+        <label for="email">Correo electrónico</label>
+        <small class="msg" id="mEmail" role="alert"></small>
+      </div>
+
+      <div class="field" id="fPass">
+        <input type="password" id="pass" name="pass" placeholder=" " autocomplete="current-password" required>
+        <label for="pass">Contraseña</label>
+        <button class="eye" type="button" id="eye" aria-label="Mostrar contraseña" aria-pressed="false">Ver</button>
+        <small class="msg" id="mPass" role="alert"></small>
+        <small class="caps" id="caps" hidden>Bloq Mayús está activado</small>
+      </div>
+
+      <div class="options">
+        <label class="check"><input type="checkbox" id="remember"><span></span>Recordar mi correo</label>
+        <button class="link" type="button" id="forgot">¿Olvidaste tu contraseña?</button>
+      </div>
+
+      <button class="btn" type="submit" id="submit"><span class="btn-text">Ingresar</span><i class="spin" aria-hidden="true"></i></button>
+
+      <p class="demo">Demostración: <b>secretaria@tiwanaku.example</b> con clave <b>tiwa2026</b>. También: alcalde, organizador, comunario y visitante.</p>
+      <a class="back" href="index.html">&larr; Volver al inicio</a>
+    </form>
+  </section>
+</main>
+
+<div class="toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+<script src="scrip_login.js"></script>
+</body>
+</html>
