@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agenda Comunitaria de Tiwanaku</title>
 <meta name="description" content="Agenda de actividades, tradiciones y noticias de la comunidad de Tiwanaku.">
+<script>try{if(!sessionStorage.getItem('tiwanaku_sesion'))location.replace('login.html')}catch(e){location.replace('login.html')}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700;800&family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
@@ -34,7 +35,7 @@
     <a href="#tradiciones">Tradiciones</a>
     <a href="#turismo">Visitantes</a>
     <a href="#participa">Participa</a>
-    <button class="nav-cta" id="loginBtn" type="button">Ingresar</button>
+    <button class="nav-cta" id="loginBtn" type="button">Salir</button>
   </nav>
 </header>
 
@@ -170,17 +171,6 @@
   </div>
   <p class="copy">&copy; <span id="year"></span> Comunidad de Tiwanaku. Todos los derechos reservados.</p>
 </footer>
-
-<dialog id="dlgLogin" aria-labelledby="tLogin"><div class="dlg">
-  <h3 id="tLogin">Iniciar sesión</h3>
-  <form id="loginForm" novalidate>
-    <label>Usuario<input name="u" autocomplete="username" required></label>
-    <label>Contraseña<input name="p" type="password" autocomplete="current-password" required></label>
-    <p class="note" id="loginNote" role="alert"></p>
-    <div class="row"><button class="btn" type="submit">Ingresar</button><button class="btn ghost" type="button" data-close>Cancelar</button></div>
-    <p class="hint">Versión de demostración. Usuarios: alcalde, secretaria, organizador, comunario, visitante. Clave: 1234</p>
-  </form>
-</div></dialog>
 
 <dialog id="dlgInfo" aria-labelledby="iTitle"><div class="dlg">
   <div id="info"></div>

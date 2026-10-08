@@ -1,6 +1,9 @@
 (() => {
   const $ = s => document.querySelector(s);
 
+  /* Si ya hay una sesión iniciada, entra directo a la agenda */
+  try { if (sessionStorage.getItem('tiwanaku_sesion')) { location.replace('index.html'); return; } } catch (e) {}
+
   /* ---------- Cuentas de demostración (la autenticación real irá en el servidor) ---------- */
   const DEMO_PASS = 'tiwa2026';
   const USERS = {

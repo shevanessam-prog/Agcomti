@@ -71,13 +71,6 @@
   const KEY = 'tiwanaku_actividades_v1';
   const TIPOS = { comunitaria: 'Comunitaria', cultural: 'Cultural', turistica: 'Turística' };
   const MES = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
-  const USERS = {
-    alcalde: { nombre: 'Alcalde municipal', rol: 'alcalde' },
-    secretaria: { nombre: 'Secretaría municipal', rol: 'secretaria' },
-    organizador: { nombre: 'Organizador', rol: 'organizador' },
-    comunario: { nombre: 'Comunario', rol: 'comunario' },
-    visitante: { nombre: 'Visitante', rol: 'visitante' }
-  };
   const seed = [
     ['a1','Feria de productores locales','Venta directa de papa nativa, quinua y tejidos.','2026-09-19','07:00','Mercado comunal','comunitaria','Junta vecinal'],
     ['a2','Recorrido guiado al centro ceremonial','Visita guiada con información histórica para visitantes.','2026-09-26','10:00','Ingreso al centro ceremonial','turistica','Oficina de Turismo'],
@@ -99,7 +92,9 @@
   const today = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
   const fmt = f => { const [y, m, d] = f.split('-'); return `${+d} de ${MES[+m - 1]} de ${y}`; };
 
-  let acts = load(), user = null, tipo = 'all';
+  let acts = load(), tipo = 'all', user = null;
+  try { user = JSON.parse(sessionStorage.getItem('tiwanaku_sesion')); } catch (e) {}
+  if (!user) { location.replace('login.html'); return; }
   const box = $('#events'), emptyMsg = $('#empty');
   const canEdit = () => user && (user.rol === 'secretaria' || user.rol === 'organizador');
 
@@ -192,7 +187,7 @@
   /* RF01: sesión (demostración; la autenticación real va en el servidor) */
   const loginBtn = $('#loginBtn'), gestion = $('#gestion');
   function paintSession() {
-    loginBtn.textContent = user ? 'Salir' : 'Ingresar';
+    loginBtn.textContent = 'Salir';
     gestion.hidden = !user;
     if (user) {
       gestion.innerHTML = `<span>Sesión iniciada: <b>${esc(user.nombre)}</b></span>` +
@@ -206,17 +201,11 @@
     if (g === 'new') openForm(); if (g === 'rep') report();
   });
   loginBtn.addEventListener('click', () => {
-    toggleMenu(false);
-    if (user) { user = null; paintSession(); } else { $('#loginForm').reset(); $('#loginNote').textContent = ''; $('#dlgLogin').showModal(); }
-  });
-  $('#loginForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const u = e.target.u.value.trim().toLowerCase(), p = e.target.p.value;
-    if (USERS[u] && p === '1234') { user = USERS[u]; $('#dlgLogin').close(); paintSession(); }
-    else $('#loginNote').textContent = 'Usuario o contraseña incorrectos.';
+    try { sessionStorage.removeItem('tiwanaku_sesion'); } catch (e) {}
+    location.href = 'login.html';
   });
 
-  render();
+  paintSession();
 
   /* ---------- Animación al hacer scroll ---------- */
   const io = new IntersectionObserver(entries => {
